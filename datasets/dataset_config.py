@@ -1,7 +1,7 @@
 from os.path import join
 import os
 
-_BASE_DATA_PATH = "/home/sunhao/remote_code/FACIL-master/data"
+_BASE_DATA_PATH = "../data"
 
 dataset_config = {
     'mnist': {
