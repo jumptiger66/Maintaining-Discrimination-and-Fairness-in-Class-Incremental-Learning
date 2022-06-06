@@ -11,7 +11,6 @@ import approach_wa
 
 from datasets.data_loader import get_loaders
 from datasets.dataset_config import dataset_config
-# from networks import tvmodels, allmodels, set_tvmodel_head_var
 
 def main():
     tstart = time.time()
@@ -71,7 +70,7 @@ def main():
     # Args -- Network
     from networks.network import LLL_Net
     net = getattr(importlib.import_module(name='networks.'+args.network), 'resnet18_cbam')
-    init_model = net(pretrained=False) # 定义 特征提取网络convnet
+    init_model = net(pretrained=False)
 
     # Args -- Continual Learning Approach
     from approach_wa import Inc_Learning_Appr
@@ -103,17 +102,15 @@ def main():
     net = LLL_Net(init_model, remove_existing_head=not args.keep_existing_head)
     utils.seed_everything(seed=args.seed)
     # taking transformations and class indices from first train dataset
-    first_train_ds = trn_loader[0].dataset #第一批训练数据
+    first_train_ds = trn_loader[0].dataset
     transform, class_indices = first_train_ds.transform, first_train_ds.class_indices
 
-    #整合所有参数
     appr_kwargs = {**base_kwargs,**dict(**appr_args.__dict__)}
 
     if Appr_ExemplarsDataset:
         appr_kwargs['exemplars_dataset'] = Appr_ExemplarsDataset(transform, class_indices)
     utils.seed_everything(seed=args.seed)
 
-    # 将所有参数、数据传入 增量策略中
     appr = Appr(net, device, **appr_kwargs)
 
     # Loop tasks
@@ -132,7 +129,7 @@ def main():
 
         # Add head for current task
         net.add_head(taskcla[t][1])
-        net.to(device) #无fc层、仅特征提取层
+        net.to(device)
 
         # Train
         appr.train(t, trn_loader[t], tst_loader[t])
