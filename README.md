@@ -9,6 +9,8 @@ I am just a green hand in incremental learning.This code is probably wrong. If y
 
 * Cifar-100
 
+!!! you need to change _BASE_DATA_PATH (Variables under folder: datasets/dataset_config.py) to your dataset path.
+
 # Environment
 * Python 3.7.10
 * torch 1.11.0
