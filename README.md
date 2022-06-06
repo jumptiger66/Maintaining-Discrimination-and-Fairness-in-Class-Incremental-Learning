@@ -24,4 +24,7 @@ I am just a green hand in incremental learning.This code is probably wrong. If y
 | acc | 0.828 | 0.8165 |0.777	|0.7135 |0.6754  |0.6266  |0.6021 | 0.5706 |0.5372	| 0.5218  |0.66687 |
 
 
+# Thanks
+Code base:[FACIL](https://github.com/mmasana/FACIL).
+I just simplified the framework and implemented the code on this basis.
 
