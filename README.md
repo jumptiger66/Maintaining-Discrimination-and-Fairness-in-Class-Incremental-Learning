@@ -5,6 +5,6 @@ This code is my reproduction of this paper.Thanks to the code base [FACIL](https
 
 I am just a green hand in incremental learning.This code is probably wrong, please forgive me and point out my mistakes.
 
-**Dataset **
+**Dataset**
 
 * iCarl-100
