@@ -24,37 +24,8 @@ class MemoryDataset(Dataset):
         return x, y
 
 
-"""
-get_data():
-    该函数主要作用就是以class_order的数据集划分为num_tasks个子集，
-    划分为 train、val、test 三个数据集。
-    以cifar100-bic为例：
-        train:10个4500
-        val:10个500
-        test:10个1000
-data:
-    data-->dict ,data[0]-->dict
-    data[0]['xxx']['x'] --> image
-    data[0]['xxx']['y'] --> label
-
-    data[0]['xxx'], data[1]['xxx'], data[2]['xxx'] ... 每个阶段的数据，包括 trn,val,tst
-    。。。
-    data['ncla'] = 100
-taskcla:
-    [(0,10), (1,10), (2,10) ...]
-class_order:
-    [23,12,45,0,3 ...]
-"""
 # Prepare data: dataset splits, task partition, class order
 def get_data(trn_data, tst_data, num_tasks, shuffle_classes, class_order=None):
-    """
-    :param trn_data: train data
-    :param tst_data: test data
-    :param num_tasks: total experiences
-    :param shuffle_classes: shuffle class order
-    :param class_order: fix class order ,dont use when shuffle==True
-    :return: data, taskcla, class_order
-    """
 
     data = {}
     taskcla = []
@@ -93,7 +64,7 @@ def get_data(trn_data, tst_data, num_tasks, shuffle_classes, class_order=None):
         # add it to the corresponding split
         this_task = (this_label >= cpertask_cumsum).sum() #该数据分配在第几个experience中
         data[this_task]['trn']['x'].append(this_image)
-        data[this_task]['trn']['y'].append(this_label - init_class[this_task]) #！！！每一个任务内的标签都是0-10，除非label也分配到具体任务内，否则如何做损失？
+        data[this_task]['trn']['y'].append(this_label - init_class[this_task])
 
     # ALL OR TEST
     filtering = np.isin(tst_data['y'], class_order)
