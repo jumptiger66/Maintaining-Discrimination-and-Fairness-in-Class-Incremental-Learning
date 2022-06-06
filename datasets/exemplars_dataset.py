@@ -3,12 +3,7 @@ from argparse import ArgumentParser
 
 from .memory_dataset import MemoryDataset
 
-"""
-该模块
-    1. 有用的两个参数 self.max_num_exemplars（样例集数据量） 和 self.exemplars_selector（采样策略）
-    2. 两个额外参数：保留数量-> num-exemplars和 采样保留集策略-> exemplar-selection
-    3. 一个方法：collect_exemplars: 输入通过选择的采样策略返回采样数据（images,labels）
-"""
+
 class ExemplarsDataset(MemoryDataset):
     """Exemplar storage for approaches with an interface of Dataset interface：接口"""
 
