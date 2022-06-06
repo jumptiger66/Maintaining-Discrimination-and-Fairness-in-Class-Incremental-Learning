@@ -7,4 +7,4 @@ I am just a green hand in incremental learning.This code is probably wrong, plea
 
 **Dataset**
 
-* iCarl-100
+* Cifar-100
