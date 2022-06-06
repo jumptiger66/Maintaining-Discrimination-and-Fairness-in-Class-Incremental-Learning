@@ -5,16 +5,6 @@ from torchvision.datasets import CIFAR100 as TorchVisionCIFAR100
 from . import memory_dataset as memd
 from .dataset_config import dataset_config
 
-"""
-get_loaders:
-    1.读取dataset_config中对于某数据集的设置(主要包括路径和transform)
-    2.使用get_transforms函数将配置 转换成真实的transform
-    3.使用get_datasets获取数据集，该函数主要为 读取数据集，使用memory.get_data划分数据集，对乱序的数据集进行对齐
-    4.对齐+零碎操作
-    5.转变为Dataloader 
-最后返回:
-    trn_load, val_load, tst_load, taskcla
-"""
 
 def get_loaders(datasets, num_tasks,batch_size, num_workers):
     """Apply transformations to Datasets and create the DataLoaders for each task"""
@@ -37,14 +27,6 @@ def get_loaders(datasets, num_tasks,batch_size, num_workers):
         # datasets
         trn_dset, tst_dset, taskcla = get_datasets(cur_dataset, dc['path'], num_tasks,trn_transform=trn_transform,
                                                                 tst_transform=tst_transform,class_order=dc['class_order'])
-
-        # tst_dset2 = [None]*num_tasks
-        # for i in range(num_tasks):
-        #     concat_dset = tst_dset[i]
-        #     for j in range(i):
-        #         concat_dset = concat_dset + tst_dset[j]
-        #     tst_dset2[i] = concat_dset
-        # tst_dset = tst_dset2
 
         # loaders
         for tt in range(num_tasks):
