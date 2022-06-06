@@ -19,7 +19,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     # miscellaneous args
-    parser.add_argument('--gpu', type=int, default=2,help='GPU (default=%(default)s)')
+    parser.add_argument('--gpu', type=int, default=0,help='GPU (default=%(default)s)')
     parser.add_argument('--seed', type=int, default=2222,help='Random seed (default=%(default)s)')
     # dataset args
     parser.add_argument('--datasets', default=['cifar100'], type=str, choices=list(dataset_config.keys()),
@@ -38,7 +38,7 @@ def main():
     # training args
     parser.add_argument('--approach', default='WA', type=str,
                         help='Learning approach used (default=%(default)s)', metavar="APPROACH")
-    parser.add_argument('--nepochs', default=1, type=int, required=False,
+    parser.add_argument('--nepochs', default=100, type=int, required=False,
                         help='Number of epochs per training session (default=%(default)s)')
     parser.add_argument('--lr', default=0.1, type=float, required=False,
                         help='Starting learning rate (default=%(default)s)')
