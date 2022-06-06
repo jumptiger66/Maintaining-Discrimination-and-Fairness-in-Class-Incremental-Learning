@@ -102,10 +102,10 @@ class WA(Inc_Learning_Appr):
                  val_exemplar_percentage=0.1, num_bias_epochs=200, T=2, lamb=-1):
         super(WA, self).__init__(model, device, nepochs, lr, momentum, wd, exemplars_dataset,milestone)
 
-        self.val_percentage = val_exemplar_percentage  # bias修正需要的训练集比例，paper中为9：1最优
-        self.bias_epochs = num_bias_epochs  # stage2训练轮数
+        self.val_percentage = val_exemplar_percentage 
+        self.bias_epochs = num_bias_epochs 
         self.model_old = None
-        self.T = T  # 蒸馏温度
+        self.T = T 
         self.lamb = lamb
 
         self.num_exemplars = self.exemplars_dataset.max_num_exemplars  # 2000
@@ -167,7 +167,7 @@ class WA(Inc_Learning_Appr):
         losses = []
         for images, targets in trn_loader:
             # Forward old model
-            targets_old = None #做蒸馏用的
+            targets_old = None
             if t > 0:
                 targets_old = self.model_old(images.to(self.device))
             # Forward current model
@@ -226,17 +226,3 @@ class WA(Inc_Learning_Appr):
                                                                     targets) + lamb * loss_dist  # (1-lamb) x Lc + lamb x Ld
         else:
             return torch.nn.functional.cross_entropy(torch.cat(outputs, dim=1), targets) + self.lamb * loss_dist
-
-    # def criterion(self):
-    #     def _compute_loss(self, indexs, imgs, target):
-    #         output = self.model(imgs)
-    #         target = get_one_hot(target, self.numclass)
-    #         output, target = output.to(device), target.to(device)
-    #         if self.old_model == None:
-    #             return F.binary_cross_entropy_with_logits(output, target)
-    #         else:
-    #             # old_target = torch.tensor(np.array([self.old_model_output[index.item()] for index in indexs]))
-    #             old_target = torch.sigmoid(self.old_model(imgs))
-    #             old_task_size = old_target.shape[1]
-    #             target[..., :old_task_size] = old_target
-    #             return F.binary_cross_entropy_with_logits(output, target)
