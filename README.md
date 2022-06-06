@@ -9,4 +9,11 @@ I am just a green hand in incremental learning.This code is probably wrong. If y
 
 * Cifar-100
 
+# Environment
+* Python 3.7.10
+* torch 1.11.0
+* torchvision 0.4.2
+* CUDA 11.6
+
+
 
