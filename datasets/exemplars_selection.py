@@ -11,12 +11,6 @@ from torchvision.transforms import Lambda
 from datasets.exemplars_dataset import ExemplarsDataset
 from networks.network import LLL_Net
 
-"""
-RandomExemplarsSelector：
-    1.设定每个类的保存数量上限；
-    2.在训练数据中选出每个类的数据的idx；
-    3.根据idx取出数据，返回。
-"""
 class ExemplarsSelector:
     """Exemplar selector for approaches with an interface of Dataset"""
 
@@ -32,7 +26,7 @@ class ExemplarsSelector:
                                     num_workers=trn_loader.num_workers)
             selected_indices = self._select_indices(model, sel_loader, exemplars_per_class,transform)
         with override_dataset_transform(trn_loader.dataset, Lambda(lambda x: np.array(x))) as ds_for_raw:
-            x, y = zip(*(ds_for_raw[idx] for idx in selected_indices))  # x->1800 数据(32,32,3),y->1800 标签(1,)
+            x, y = zip(*(ds_for_raw[idx] for idx in selected_indices))
         clock1 = time.time()
         print('| Selected {:d} train exemplars, time={:5.1f}s'.format(len(x), clock1 - clock0))
         return x, y
