@@ -3,8 +3,10 @@ Unoffical code for paper Maintaining Discrimination and Fairness in Class Increm
 
 This code is my reproduction of this paper.Thanks to the code base [FACIL](https://github.com/mmasana/FACIL).
 
-I am just a green hand in incremental learning.This code is probably wrong, please forgive me and point out my mistakes.
+I am just a green hand in incremental learning.This code is probably wrong. If you are checking my code, please forgive me for wasting your time and point out my mistakes.
 
 **Dataset**
 
 * Cifar-100
+
+
