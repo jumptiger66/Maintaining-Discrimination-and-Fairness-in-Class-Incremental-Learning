@@ -25,6 +25,8 @@ I am just a green hand in incremental learning.This code is probably wrong. If y
 
 
 # Thanks
+
 Code base:[FACIL](https://github.com/mmasana/FACIL).
+
 I just simplified the framework and implemented the code on this basis.
 
